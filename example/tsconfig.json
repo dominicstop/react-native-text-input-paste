@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "react-native-text-input-paste": ["../src/index"],
+      "react-native-text-input-paste/*": ["../src/*"]
+    }
+  }
+}
