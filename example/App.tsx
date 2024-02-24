@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import * as RNTextInputPaste from 'react-native-text-input-paste';
+import { TextInputWrapperView } from 'react-native-text-input-paste';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>{RNTextInputPaste.hello()}</Text>
+      <TextInputWrapperView/>
     </View>
   );
 }
