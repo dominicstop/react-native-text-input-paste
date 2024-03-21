@@ -1,9 +1,6 @@
 {
-  "platforms": ["ios", "android"],
+  "platforms": ["ios"],
   "ios": {
-    "modules": ["RNTextInputPasteModule"]
-  },
-  "android": {
-    "modules": ["dev.dominicgo.reactnativetextinputpaste.RNTextInputPasteModule"]
+    "modules": []
   }
 }
