@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 
 import React from "react";
-import { StyleSheet, TextInputProps } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 
-import type { TextInputWrapperViewProps } from "./TextInputWrapperViewTypes";
+import type { TextInputPasteProps } from "./TextInputPasteTypes";
+
 import { RNITextInputWrapperView } from "../../native_components/RNITextInputWrapperView";
-import { IS_PLATFORM_ANDROID, IS_PLATFORM_IOS } from "../../constants/LibEnv";
 import { RNATextInputWrapperView } from "../../native_components/RNATextInputWrapperView";
+
+import { IS_PLATFORM_IOS } from "../../constants/LibEnv";
 
 const NATIVE_ID_KEYS = {
   textInput: "textInput",
 };
 
-export class TextInputWrapperView extends React.PureComponent<TextInputWrapperViewProps> {
+export class TextInputPaste extends React.PureComponent<TextInputPasteProps> {
 
   nativeRefIOS!: RNITextInputWrapperView;
   nativeRefAndroid!: RNATextInputWrapperView;
@@ -20,7 +22,7 @@ export class TextInputWrapperView extends React.PureComponent<TextInputWrapperVi
   // Lifecycle
   // ---------
 
-  constructor(props: TextInputWrapperViewProps){
+  constructor(props: TextInputPasteProps){
     super(props);
   };
 
@@ -31,7 +33,7 @@ export class TextInputWrapperView extends React.PureComponent<TextInputWrapperVi
     const { 
       pasteConfiguration,
       editMenuDefaultActions,
-      ...viewProps 
+      ...textInputProps 
     } = this.props;
 
     return {
@@ -43,7 +45,7 @@ export class TextInputWrapperView extends React.PureComponent<TextInputWrapperVi
 
       // B. Move all the default view-related
       //    props here...
-      viewProps,
+      textInputProps,
     };
   };
 
@@ -53,53 +55,31 @@ export class TextInputWrapperView extends React.PureComponent<TextInputWrapperVi
   render() {
     const props = this.getProps();
 
-    const hasChildren = React.Children.count(this.props.children);
-    if(hasChildren <= 0) return null;
-
-    const childrenWithProps = React.Children.map(this.props.children, child => {
-      if(!React.isValidElement(child)) {
-        return child;
-      };
-
-      const newProps: TextInputProps = {
-        nativeID: NATIVE_ID_KEYS.textInput,
-      }; 
-      
-      return React.cloneElement(child, newProps);
-    });
-
     if(IS_PLATFORM_IOS){
       return (
         <RNITextInputWrapperView
-          {...props.viewProps}
           {...props.nativeProps}
           ref={(r) => {
             this.nativeRefIOS = r!;
           }}
-          style={[styles.nativeView, props.viewProps.style]}
+          style={[styles.nativeView]}
           onPaste={this.props.onPaste}
         >
-          {childrenWithProps}
+          <TextInput
+            {...props.textInputProps}
+            nativeID={NATIVE_ID_KEYS.textInput}
+          />
         </RNITextInputWrapperView>
       );
     };
 
-    if(IS_PLATFORM_ANDROID){
-      <RNATextInputWrapperView
-        {...props.viewProps}
-        {...props.nativeProps}
-        ref={(r) => {
-          this.nativeRefAndroid = r!;
-        }}
-        style={[styles.nativeView, props.viewProps.style]}
-      >
-        {childrenWithProps}
-      </RNATextInputWrapperView>
-    };
-    
-    return undefined;
-  }
-}
+    return (
+      <TextInput
+        {...props.textInputProps}
+      />
+    );
+  };
+};
 
 const styles = StyleSheet.create({
   nativeView: {

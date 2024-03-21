@@ -1,13 +1,17 @@
 import * as React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-import { TextInputWrapperView } from "react-native-text-input-paste";
+import { TextInputPaste } from "react-native-text-input-paste";
 
 function TextInputTestItems(){
   return (
     <React.Fragment>
-      <TextInputWrapperView
-        style={styles.exampleItem}
+      <TextInputPaste
+        style={[
+          styles.exampleItem,
+          styles.textInput
+        ]}
+        placeholder="Write something..."
         pasteConfiguration={[
           'public.text',
           'public.image',
@@ -17,14 +21,13 @@ function TextInputTestItems(){
             "onPaste event - nativeEvent", nativeEvent,
           );
         }}
-      >
-        <TextInput
-          style={styles.textInput}
-          placeholder="Write something..."
-        />
-      </TextInputWrapperView>
-      <TextInputWrapperView
-        style={styles.exampleItem}
+      />
+      <TextInputPaste
+        style={[
+          styles.exampleItem,
+          styles.textInput
+        ]}
+        placeholder="Write something..."
         pasteConfiguration={[
           'public.text',
           'public.image',
@@ -38,12 +41,7 @@ function TextInputTestItems(){
             "onPaste event - nativeEvent", nativeEvent,
           );
         }}
-      >
-        <TextInput
-          style={styles.textInput}
-          placeholder="Write something..."
-        />
-      </TextInputWrapperView>
+      />
     </React.Fragment>
   );
 };
