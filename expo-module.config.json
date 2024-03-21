@@ -1,6 +1,8 @@
 {
   "platforms": ["ios"],
   "ios": {
-    "modules": []
+    "modules": [
+      "RNITextInputWrapperViewModule"
+    ]
   }
 }
