@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextInput } from 'react-native-web';
+import { TextInput } from 'react-native';
 
 import { TextInputPasteProps } from "./TextInputPasteTypes";
 
@@ -27,7 +27,7 @@ export function TextInputPaste(props: TextInputPasteProps) {
 
     props.onPaste({
       platform: 'web',
-      rawEvent: event,
+      ...event,
     });
   };
 

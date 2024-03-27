@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 
 import React from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { Platform, StyleSheet, TextInput } from "react-native";
 
 import type { TextInputPasteProps } from "./TextInputPasteTypes";
 
@@ -49,6 +49,15 @@ export class TextInputPaste extends React.PureComponent<TextInputPasteProps> {
     };
   };
 
+  private _handleOnPaste_IOS = (event) => {
+    if(this.props.onPaste == null) return;
+
+    this.props.onPaste({
+      platform: 'ios',
+      ...event,
+    });
+  };
+
   // Render
   // -----
 
@@ -63,7 +72,7 @@ export class TextInputPaste extends React.PureComponent<TextInputPasteProps> {
             this.nativeRefIOS = r!;
           }}
           style={[styles.nativeView]}
-          onPaste={this.props.onPaste}
+          onPaste={this._handleOnPaste_IOS}
         >
           <TextInput
             {...props.textInputProps}

@@ -11,7 +11,7 @@ export type TextInputPasteOnPasteEventPayload_Web = {
 
 export type TextInputPasteOnPasteEventObject_Web =  
     TextInputPasteOnPasteEventPayload_Web
-  & { rawEvent: ClipboardEvent }
+  & ClipboardEvent
   & { platform: "web" };
 
 export type TextInputPasteOnPasteEventObject =
