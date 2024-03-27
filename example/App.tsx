@@ -36,10 +36,9 @@ function TextInputTestItems(){
           'define',
           'paste',
         ]}
-        onPaste={({nativeEvent}) => {
-          console.log(
-            "onPaste event - nativeEvent", nativeEvent,
-          );
+        onPaste={(event) => {
+          console.log("onPaste event - nativeEvent", event.nativeEvent);
+          console.log("onPaste event - nativeEvent", event);
         }}
       />
     </React.Fragment>

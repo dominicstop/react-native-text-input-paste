@@ -1,7 +1,10 @@
-import React from "react";
-import { TextInput, TextInputProps } from 'react-native-web';
+import * as React from "react";
+import { TextInput } from 'react-native-web';
 
-export function TextInputPaste(props: TextInputProps) {
+import { TextInputPasteProps } from "./TextInputPasteTypes";
+
+
+export function TextInputPaste(props: TextInputPasteProps) {
   React.useEffect(() => {
     window.addEventListener('paste', handleOnPaste);
 
@@ -11,16 +14,21 @@ export function TextInputPaste(props: TextInputProps) {
   }, []);
 
   const handleOnPaste = (event: ClipboardEvent) => {
-    console.log("handleOnPaste", event);
-    
+    event.stopPropagation();
+
+    if(props.onPaste == null) return;
     if(event.clipboardData == null) return;
 
     // get elements from clipboard
     var items = event.clipboardData.items;
-
-    if(items == null) return;
+    if(items == null) return;   
 
     console.log("handleOnPaste - items", items);
+
+    props.onPaste({
+      platform: 'web',
+      rawEvent: event,
+    });
   };
 
   return(

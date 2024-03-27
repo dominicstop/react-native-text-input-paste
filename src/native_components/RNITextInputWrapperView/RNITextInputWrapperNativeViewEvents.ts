@@ -27,7 +27,7 @@ export type RNITextInputWrapperOnPasteEventPayloadIntersection = {
 
 export type RNITextInputWrapperOnPasteEventPayload =
     RNITextInputWrapperOnPasteEventPayloadBase
-  & RNITextInputWrapperOnPasteEventPayloadIntersection;
+  & RNITextInputWrapperOnPasteEventPayloadIntersection
 
 export type RNITextInputWrapperOnPasteEventObject =  
   NativeSyntheticEvent<RNITextInputWrapperOnPasteEventPayload>;
