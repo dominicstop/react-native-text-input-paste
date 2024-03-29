@@ -1,5 +1,5 @@
 import { MimeTypeString } from "../types/MimeType";
-import { MimeTypeConfig } from "../types/MimeTypeConfig";
+import { MimeTypeConfig, MimeTypeQueryString } from "../types/MimeTypeConfig";
 
 
 export function evaluateMimeTypeConfig(
@@ -48,10 +48,10 @@ export function evaluateMimeTypeConfig(
   };
 };
 
-function evaluateMimeTypeString(
+export function evaluateMimeTypeString(
   comparisonMode: MimeTypeConfig['comparisonMode'],
-  mimeTypeString1: MimeTypeString,
-  mimeTypeString2: MimeTypeString,
+  mimeTypeString1: MimeTypeQueryString,
+  mimeTypeString2: MimeTypeQueryString,
 ){
   switch(comparisonMode) {
     case "contains":
