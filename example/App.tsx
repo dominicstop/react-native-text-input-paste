@@ -16,10 +16,16 @@ function TextInputTestItems(){
           'public.text',
           'public.image',
         ]}
-        onPaste={({nativeEvent}) => {
-          console.log(
-            "onPaste event - nativeEvent", nativeEvent,
-          );
+        onPaste={(event) => {
+          switch(event.platform){
+            case 'ios':
+              console.log("onPaste event - nativeEvent", event.nativeEvent);
+              break;
+
+            case 'web':
+              console.log("onPaste event - clipboardItems", event.clipboardItems);
+              break;
+          };
         }}
       />
       <TextInputPaste
@@ -37,8 +43,24 @@ function TextInputTestItems(){
           'paste',
         ]}
         onPaste={(event) => {
-          console.log("onPaste event - nativeEvent", event.nativeEvent);
-          console.log("onPaste event - nativeEvent", event);
+          switch(event.platform){
+            case 'ios':
+              console.log("onPaste event - nativeEvent", event.nativeEvent);
+              break;
+
+            case 'web':
+              console.log("onPaste event - clipboardItems", event.clipboardItems);
+
+              for(const clipboardItem of event.clipboardItems){
+                switch(clipboardItem.type){
+                  case 'image':
+                    const body = document.getElementById("root");
+                    body!.appendChild(clipboardItem.image);
+                    break;
+                };
+              };
+              break;
+          };
         }}
       />
     </React.Fragment>
