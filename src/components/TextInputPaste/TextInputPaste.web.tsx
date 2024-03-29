@@ -23,22 +23,13 @@ export function TextInputPaste(props: TextInputPasteProps) {
 
     try {
       const clipboardItems = await navigator.clipboard.read();
-
-      console.log({clipboardItems});
-
       const clipboardItemsProcessed: Array<ClipboardItemTypeWeb> = [];
 
       for(const clipboardItem of clipboardItems) {
-        
-        console.log({clipboardItem});
-        
         for(const clipboardItemType of clipboardItem.types) {
           if(clipboardItemType == null) continue;
           const clipboardMimeType: MimeTypeString = clipboardItemType.toString();
 
-          console.log({clipboardMimeType});
-          console.log({clipboardItemType});
-          
           const blob = await clipboardItem.getType(clipboardItemType);
 
           let clipboardItemProcessed: ClipboardItemTypeWeb = {
@@ -65,7 +56,6 @@ export function TextInputPaste(props: TextInputPasteProps) {
           };
 
           clipboardItemsProcessed.push(clipboardItemProcessed);
-          console.log({blob});
         };
       };
 
