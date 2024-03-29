@@ -8,13 +8,14 @@ export type MimeTypeBaseQueryString =
 
 export type MimeTypeQueryString = LiteralUnion<MimeTypeBaseQueryString>;
 
-export type MimeTypeConfig = {
-  mode: "config"
-  type: MimeTypeDiscreteType;
-  subtype: MimeTypeSubType;
-  parameter: string;
+export type MimeTypeConfig = ({
+  mode: "config";
+  type?: MimeTypeDiscreteType;
+  subtype?: MimeTypeSubType;
+  parameter?: string;
 } | {
   mode: "string";
-  comparisonMode: "equals" | "contains";
   mimeString: MimeTypeQueryString;
+}) & {
+  comparisonMode?: "equals" | "contains";
 };
