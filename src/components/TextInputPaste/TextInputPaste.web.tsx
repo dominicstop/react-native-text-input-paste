@@ -15,24 +15,7 @@ export function TextInputPaste(props: TextInputPasteProps) {
 
   const handleOnPaste = async (event: ClipboardEvent) => {
     if(props.onPaste == null) return;
-    if(event.clipboardData == null) return;
-
     event.stopPropagation();
-
-    console.log({clipboardData: event.clipboardData});
-
-
-    // get elements from clipboard
-    var clipboardItems = event.clipboardData.items;
-    if(clipboardItems == null) return;
-    if(clipboardItems.length == 0) return;
-
-
-    console.log({clipboardItems});
-
-    for(const clipboardItem in clipboardItems){
-      console.log({clipboardItem});
-    };
 
     try {
       const clipboardItems = await navigator.clipboard.read();
